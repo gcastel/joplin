@@ -77,6 +77,21 @@ class MainScreenComponent extends React.Component {
 			});
 		}
 
+		const createNewInboxTodo = async () => {
+			const folderId = Setting.value('activeFolderId');
+			if (!folderId) return;
+
+			const newNote = {
+				parent_id: folderId,
+				is_todo: 1,
+			};
+
+			this.props.dispatch({
+				type: 'NOTE_SET_NEW_ONE',
+				item: newNote,
+			});
+		}
+
 		let commandProcessed = true;
 
 		if (command.name === 'newNote') {
@@ -86,7 +101,14 @@ class MainScreenComponent extends React.Component {
 			}
 
 			await createNewNote(null, false);
-		} else if (command.name === 'newTodo') {
+		} else if (command.name === 'newInboxTodo') {
+          			if (!this.props.folders.length) {
+          				bridge().showErrorMessageBox(_('Please create a notebook first'));
+          				return;
+          			}
+
+          			await createNewInboxTodo();
+         } else if (command.name === 'newTodo') {
 			if (!this.props.folders.length) {
 				bridge().showErrorMessageBox(_('Please create a notebook first'));
 				return;

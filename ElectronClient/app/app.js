@@ -351,7 +351,16 @@ class Application extends BaseApplication {
 						});
 					}
 				}, {
-					label: _('New notebook'),
+					label: _('New Inbox to-do'),
+					accelerator: 'CommandOrControl+W',
+					screens: ['Main'],
+					click: () => {
+						this.dispatch({
+							type: 'WINDOW_COMMAND',
+							name: 'newInboxTodo',
+						});
+					}
+				}, {					label: _('New notebook'),
 					screens: ['Main'],
 					click: () => {
 						this.dispatch({

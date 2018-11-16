@@ -78,7 +78,7 @@ class MainScreenComponent extends React.Component {
 		}
 
 		const createNewInboxTodo = async () => {
-			const folderId = Setting.value('activeFolderId');
+			const folderId = Setting.value('inboxFolderId');
 			if (!folderId) return;
 
 			const newNote = {

@@ -535,6 +535,11 @@ class BaseApplication {
 		if (currentFolderId) currentFolder = await Folder.load(currentFolderId);
 		if (!currentFolder) currentFolder = await Folder.defaultFolder();
 		Setting.setValue('activeFolderId', currentFolder ? currentFolder.id : '');
+		let inboxFolderId = Setting.value('inboxFolderId');
+		let inboxFolder = null;
+		if (inboxFolderId) inboxFolder = await Folder.load(inboxFolderId);
+		if (!inboxFolder) inboxFolder = await Folder.inboxFolder();
+		Setting.setValue('inboxFolderId', inboxFolder ? inboxFolder.id : '')
 
 		// await this.testing();process.exit();
 

@@ -161,6 +161,10 @@ class Folder extends BaseItem {
 		return this.modelSelectOne('SELECT * FROM folders ORDER BY created_time DESC LIMIT 1');
 	}
 
+	static inboxFolder() {
+		return this.modelSelectOne("SELECT * FROM folders WHERE title = '\!nbox' LIMIT 1");
+	}
+
 	static async canNestUnder(folderId, targetFolderId) {
 		if (folderId === targetFolderId) return false;
 
